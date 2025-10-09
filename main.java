@@ -5,6 +5,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class main {
 
@@ -31,6 +34,7 @@ public class main {
 
         // functions
         Scanner keyboard = new Scanner(System.in);
+        ExecutorService threads = Executors.newCachedThreadPool(null);
 
         // getting hash
         System.out.print("Please Input SHA-256 Value: ");
@@ -49,7 +53,6 @@ public class main {
                                     + "-" + Integer.toString(num1) + Integer.toString(num2) + 
                                     Integer.toString(num3) + Integer.toString(num4);
                                     String tempHash = hexString(getSha(tempString));
-                                    System.out.println(tempHash);
                                     if(shaValue.compareTo(tempHash)==0){
                                         liscenseNumber = tempString;
                                         break;
@@ -59,7 +62,7 @@ public class main {
                         }
                     }
                 }
-            }
+            } //});
         }
 
             System.out.println("The Liscense Plate is " + liscenseNumber);
@@ -119,4 +122,32 @@ public class main {
             System.out.println("Improper Response; Please respond with a Y or a N");
         }
     }
+
+    public static String algorithm(String result) throws NoSuchAlgorithmException{
+        String returnValue = null;
+        for(int x = 0; x < 26; x++){
+            for(int y = 0; y < 26; y++){
+                for(int z = 0; z < 26; z++){
+                    for(int num1 = 0; num1 < 10; num1++){
+                        for(int num2 = 0; num2 < 10; num2++){
+                            for(int num3 = 0; num3 < 10; num3++){
+                                for (int num4 = 0; num4 < 10; num4++){
+                                    String tempString = letters.get(x) + letters.get(y) + letters.get(z) 
+                                    + "-" + Integer.toString(num1) + Integer.toString(num2) + 
+                                    Integer.toString(num3) + Integer.toString(num4);
+                                    String tempHash = hexString(getSha(tempString));
+                                    if(result.compareTo(tempHash)==0){
+                                        returnValue = tempString;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return returnValue;
+    }
+
 }
