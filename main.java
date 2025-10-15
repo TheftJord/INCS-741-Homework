@@ -45,10 +45,10 @@ public class main {
 
         // getting hashs
         System.out.print("Please Input SHA-256 Value: ");
-        shaValue = keyboard.next();
+        shaValue = keyboard.nextLine(); // I felt the pain of putting next() instead of nextLine()
 
         // Seperating Hashes
-        hashes = shaValue.trim().split(",");
+        hashes = shaValue.replaceAll("\\s+","").split(",");
 
         // Making the Thread Pools
         ExecutorService threads = Executors.newFixedThreadPool(hashes.length); //makes threads
@@ -56,6 +56,7 @@ public class main {
 
         // --- Problem Solving Code ---
 
+        System.out.println("Working on the " + hashes.length + " hashes, please wait!");
         System.out.println("The Liscense Plate Numbers are: ");
         for(String part : hashes){ // loops for each hash
             threads.execute(() -> { //creates threads for each hash to reduce time
@@ -190,3 +191,10 @@ public class main {
         }
     }
 }
+
+/*
+ * Test Values For The Code:
+ * sha256(LUE-2129) = 0xB4ECF4E82FCD763E2125CF8B9BAD4837239FF8E5EB2AB04D42293CEEBE636B0E
+ * sha256(FBL-9680) = 0xCFB0518AA3001B7BAE333093C1510334C1BE3F849F37795EAC217E07F31DB28C
+ * sha256(GNG-6571) = 0x62FE28DB9EB337A7133233134DD2CF34C5810691A4B04E64C0E9C732343BB813
+ */
