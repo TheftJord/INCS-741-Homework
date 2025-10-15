@@ -9,6 +9,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Program to find hashes of liscense plates
+ * @author Ed T
+ */
 public class main {
 
     // Universal Variables
