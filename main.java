@@ -18,7 +18,7 @@ public class main {
     "F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
 
     //-----------------------------------------------Primary Method------------------------------------------------
-    
+
     /**
      * This is the class that starts the code
      * @param argc
@@ -48,7 +48,7 @@ public class main {
         shaValue = keyboard.next();
 
         // Seperating Hashes
-        hashes = shaValue.split(",");
+        hashes = shaValue.trim().split(",");
 
         // Making the Thread Pools
         ExecutorService threads = Executors.newFixedThreadPool(hashes.length); //makes threads
@@ -61,7 +61,7 @@ public class main {
             threads.execute(() -> { //creates threads for each hash to reduce time
                 try {
                     String solution = algorithm(part); // sends thread to cracking algo
-                    System.out.println("- " + solution); // prints solution
+                    System.out.println("- " + solution +" : " + part); // prints solution
                 } catch (NoSuchAlgorithmException ex) {
                     System.out.println("An Error has Occured");
                 }
@@ -179,10 +179,11 @@ public class main {
 
         // process response
         if(response.compareTo("Y")==0 || response.compareTo("y")==0){
-            primaryFunction();
+            primaryFunction(); // restarts loop
         }
         else if(response.compareTo("N")==0 || response.compareTo("n")==0){
             System.out.println("Thank you for your service");
+            System.exit(0); // ends program
         }
         else{
             System.out.println("Improper Response; Please respond with a Y or a N");
