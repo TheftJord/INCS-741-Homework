@@ -60,7 +60,7 @@ public class main {
 
         // --- Problem Solving Code ---
 
-        System.out.println("Working on the " + hashes.length + " hashes, please wait!");
+        System.out.println("\nWorking on the " + hashes.length + " hashes, please wait! \n");
         System.out.println("The Liscense Plate Numbers are: ");
         for(String part : hashes){ // loops for each hash
             threads.execute(() -> { //creates threads for each hash to reduce time
@@ -79,6 +79,7 @@ public class main {
         // --- Problem Solving Code ---
 
         repeat(); // allows user to repeat code without restarting
+        keyboard.close(); // closes keyboard
     }
 
     //------------------------------------------Hash Cracking Methods----------------------------------------------
@@ -131,14 +132,33 @@ public class main {
 
         // variables
         String returnValue = null;
+        boolean breaker = false;
 
         // Cracking Loops
         for(int x = 0; x < 26; x++){ // Goes through slot 1
+            if(breaker){
+                break;
+            }
             for(int y = 0; y < 26; y++){ // Goes throught slot 2
+                if(breaker){
+                    break;
+                }
                 for(int z = 0; z < 26; z++){ // Goes throught slot 3
+                    if(breaker){
+                        break;
+                    }
                     for(int num1 = 0; num1 < 10; num1++){ // Goes throught slot 4
+                        if(breaker){
+                            break;
+                        }
                         for(int num2 = 0; num2 < 10; num2++){ // Goes throught slot 5
+                            if(breaker){
+                                break;
+                            }
                             for(int num3 = 0; num3 < 10; num3++){ // Goes throught slot 6
+                                if(breaker){
+                                    break;
+                                }
                                 for (int num4 = 0; num4 < 10; num4++){ // Goes throught slot 7
 
                                     // converts the present values into a liscense plate number
@@ -152,6 +172,7 @@ public class main {
                                     // Compares the results of the hashed liscense plate
                                     if(result.compareTo(tempHash)==0){ //checks if they are the same
                                         returnValue = tempString; // if true will set the returnValue to match
+                                        breaker = true; // makes it so the rest of the loops break
                                         break; // breaks the loop
                                     }
                                 }
@@ -183,16 +204,18 @@ public class main {
         String response = keyboard.next();
 
         // process response
-        if(response.compareTo("Y")==0 || response.compareTo("y")==0){
+        if(response.toUpperCase().compareTo("Y")==0 || response.toUpperCase().compareTo("YES")==0){
             primaryFunction(); // restarts loop
         }
-        else if(response.compareTo("N")==0 || response.compareTo("n")==0){
+        else if(response.toUpperCase().compareTo("N")==0 || response.toUpperCase().compareTo("NO")==0){
             System.out.println("Thank you for your service");
             System.exit(0); // ends program
         }
         else{
             System.out.println("Improper Response; Please respond with a Y or a N");
         }
+
+        keyboard.close();
     }
 }
 
@@ -202,3 +225,23 @@ public class main {
  * sha256(FBL-9680) = 0xCFB0518AA3001B7BAE333093C1510334C1BE3F849F37795EAC217E07F31DB28C
  * sha256(GNG-6571) = 0x62FE28DB9EB337A7133233134DD2CF34C5810691A4B04E64C0E9C732343BB813
  */
+
+ /*
+  * Home Assignment Values:
+  * 
+  * 1) 0x339E7E05350D90AC9F9334EBAD788CCB0B8A79713BD47F525BAA7A4536563886
+  * 2) 0xB9625EB12235EB18B077A594705C35A67D3999469C5DC43A7837CFDAEFC728D1
+  * 3) 0x1EA8E7248B5879A1DC4738FA68ECC4A91500D59D3896C87C3F09AC7061B58E2F
+  * 4) 0x98677E16E83584AB00C4667AD1EEFC2F325025B248E463FCC368AE0944C0101C
+  * 5) 0x09F3D69FBCB52E4355675816A3C47293832AEE351589C29CE768F433A76D1048
+  * 6) 0xF2A30637A648CECF1FECCB7F6470242D2160036F1E1403CF037A2A7D907DE6C5
+  *
+  * Anwers:
+  * 
+  * 1) ONR-3844 : 0x339E7E05350D90AC9F9334EBAD788CCB0B8A79713BD47F525BAA7A4536563886
+  * 2) ZQY-5445 : 0xB9625EB12235EB18B077A594705C35A67D3999469C5DC43A7837CFDAEFC728D1
+  * 3) XVG-9493 : 0x1EA8E7248B5879A1DC4738FA68ECC4A91500D59D3896C87C3F09AC7061B58E2F
+  * 4) PUT-5640 : 0x98677E16E83584AB00C4667AD1EEFC2F325025B248E463FCC368AE0944C0101C
+  * 5) IFG-8661 : 0x09F3D69FBCB52E4355675816A3C47293832AEE351589C29CE768F433A76D1048
+  * 6) AFL-7095 : 0xF2A30637A648CECF1FECCB7F6470242D2160036F1E1403CF037A2A7D907DE6C5
+  */
